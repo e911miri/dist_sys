@@ -1,5 +1,5 @@
-jupyter:
-  image: jupyter/all-spark
+nupyter:
+  image: jupyter/all-spark-notebook
   restart: always
   links:
     - redis
@@ -18,12 +18,10 @@ mongodata:
   image: mongo
   command: echo 'Data Container for MongoDB'
   volumes:
-    - data/mongo
+    - /data/mongo
 
 redis:
   image: redis
-  ports:
-    - 6379:6379
   volumes_from:
     - redisdata
 
@@ -31,18 +29,18 @@ redisdata:
   image: redis
   command: echo 'Data Container for Redis'
   volumes:
-    - data/redis
+    - /data/redis
 
 rq:
-  image: python:onbuild
+  build: .
   links:
     - redis
     - mongo
   restart: always
-  entrypoint: ["rq", "worker", "-c", "conf.rq_settings"]
+  entrypoint: ["rq", "worker", "-c", "lib.conf.rq_settings"]
 
 webserver:
-  image: python:onbuild
+  build: .
   restart: always
   links:
     - redis

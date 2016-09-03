@@ -4,11 +4,7 @@ from os import system
 from redis import StrictRedis
 from rq import Queue
 
-from lib import Q
-from lib.controllers.application_controller import help_me, quit, reload_all
 from lib.helpers.application_helper import validated_input
-from lib.helpers.queue_helper import heartbeat
-
 class Menu:
     '''Display a menu and respond to choices when run.'''
     def __init__(self):
@@ -18,10 +14,8 @@ class Menu:
 
         self.choices = {
             'embed' : embed,
-            'heartbeat' : heartbeat,
             'help' : help_me,
             'quit' : quit,
-            'reload' : reload_all
         }
 
         self.prompts = {
@@ -39,7 +33,7 @@ class Menu:
         }
 
     def __repr__(self):
-        menu  = '          OnRegistry Backend Interface\n'
+        menu  = '               Backend Interface\n'
         menu += '          ============================\n'
         menu += '                                      \n'
         return menu

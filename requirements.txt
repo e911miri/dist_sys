@@ -2,6 +2,7 @@ Flask
 ipdb
 IPython
 mongoengine
+pymongo
 redis
 requests
 rq

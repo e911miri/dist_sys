@@ -2,7 +2,7 @@ INTERFACE=interface_1
 MONGO=mongo_1
 REDIS=redis_1
 
-default: run
+default: build run
 
 bash:
 	docker exec -it $(MACHINE) /bin/bash

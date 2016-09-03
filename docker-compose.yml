@@ -1,15 +1,3 @@
-interface:
-  image: python:onbuild
-  restart: always
-  links:
-    - redis
-    - mongo
-  volumes:
-    - ./lib:/usr/src/app
-  ports:
-    - 8000:8000
-  entrypoint: ["python", "-m", "app"] 
-
 jupyter:
   image: jupyter/all-spark
   restart: always
@@ -52,4 +40,16 @@ rq:
     - mongo
   restart: always
   entrypoint: ["rq", "worker", "-c", "conf.rq_settings"]
+
+webserver:
+  image: python:onbuild
+  restart: always
+  links:
+    - redis
+    - mongo
+  volumes:
+    - ./lib:/usr/src/app
+  ports:
+    - 8000:8000
+  entrypoint: ["python", "-m", "app"] 
 

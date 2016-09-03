@@ -1,3 +1,6 @@
+def test_function():
+    pass
+
 def validated_input(choices):
     input_value = None
     while input_value == None:

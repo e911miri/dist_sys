@@ -39,6 +39,3 @@ def logging_example():
     APP.logger.debug('this is a debug statement.')
     APP.logger.critical('stop everything!')
     return Response(json.dumps({'message' : 'check the logs!'}), 200)
-
-if __name__ == '__main__':
-    APP.run(host='0.0.0.0', port=8000)

@@ -1,5 +1,5 @@
-nupyter:
-  image: jupyter/all-spark-notebook
+jupyter:
+  build: docker/jupyter
   restart: always
   links:
     - redis
@@ -32,22 +32,24 @@ redisdata:
     - /data/redis
 
 rq:
-  build: .
+  build: docker/python
   links:
     - redis
     - mongo
   restart: always
-  entrypoint: ["rq", "worker", "-c", "lib.conf.rq_settings"]
+  entrypoint: ["rq", "worker", "-c", "conf.rq_settings"]
+  volumes:
+    - .:/usr/src/app
 
 webserver:
-  build: .
+  build: docker/python
   restart: always
   links:
     - redis
     - mongo
   volumes:
-    - ./lib:/usr/src/app
+    - .:/usr/src/app
   ports:
     - 8000:8000
-  entrypoint: ["python", "-m", "app"] 
+  entrypoint: ["python", "-m", "app.main"] 
 

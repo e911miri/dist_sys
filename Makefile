@@ -1,4 +1,5 @@
 INTERFACE=interface_1
+MACHINE=distsys_webserver_1
 MONGO=mongo_1
 REDIS=redis_1
 

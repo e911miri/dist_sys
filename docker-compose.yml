@@ -1,5 +1,5 @@
 interface:
-  build: lib
+  image: python:onbuild
   restart: always
   links:
     - redis
@@ -8,14 +8,18 @@ interface:
     - ./lib:/usr/src/app
   ports:
     - 8000:8000
+  entrypoint: ["python", "-m", "app"] 
 
-rq:
-  build: lib
+jupyter:
+  image: jupyter/all-spark
+  restart: always
   links:
     - redis
     - mongo
-  restart: always
-  entrypoint: ["rq", "worker", "-c", "conf.rq_settings"]
+  volumes:
+    - .:/home/jovyan/work
+  ports:
+    - 8001:8888
 
 mongo:
   image: mongo
@@ -40,3 +44,12 @@ redisdata:
   command: echo 'Data Container for Redis'
   volumes:
     - data/redis
+
+rq:
+  image: python:onbuild
+  links:
+    - redis
+    - mongo
+  restart: always
+  entrypoint: ["rq", "worker", "-c", "conf.rq_settings"]
+

@@ -6,14 +6,14 @@ import json
 import logging
 from os import environ
 
+from flask import Flask, jsonify, request, redirect, Response
 from pymongo import MongoClient
 from redis import StrictRedis
 from rq import Queue
 import rq_dashboard
 
-from flask import Flask, jsonify, request, redirect, Response
-from conf import rq_dashboard_settings
-from controllers.rq_dashboard_controller import rq_dashboard_blueprint
+from lib.conf import rq_dashboard_settings
+from lib.controllers.rq_dashboard_controller import rq_dashboard_blueprint
 
 APP = Flask(__name__)
 MONGO = MongoClient(environ['MONGO_PORT_27017_TCP_ADDR'], 27017)
@@ -23,7 +23,7 @@ Q = Queue(connection=REDIS)
 
 APP.config.from_object(rq_dashboard_settings)
 APP.register_blueprint(rq_dashboard_blueprint,
-                        static_folder='static',
+                        static_folder='assets/static',
                         url_prefix='/rq')
 
 @APP.route('/')

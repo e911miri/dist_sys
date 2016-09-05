@@ -37,7 +37,7 @@ rq:
     - redis
     - mongo
   restart: always
-  entrypoint: ["rq", "worker", "-c", "conf.rq_settings"]
+  entrypoint: ["rq", "worker", "-c", "lib.conf.rq_settings"]
   volumes:
     - .:/usr/src/app
 

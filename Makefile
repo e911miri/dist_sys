@@ -1,12 +1,10 @@
+DIRNAME= distsys
 INTERFACE=interface_1
 MACHINE=distsys_webserver_1
 MONGO=mongo_1
 REDIS=redis_1
 
-default: build run
-
-bash:
-	docker exec -it $(MACHINE) /bin/bash
+default: build up
 
 build:
 	docker-compose build
@@ -14,14 +12,21 @@ build:
 down:
 	docker-compose down
 
+up:
+	docker-compose up
+
+bash_rq:
+	docker exec -it $(DIRNAME)_rq_1 /bin/bash
+
+bash_webserver:
+	docker exec -it $(DIRNAME)_webserver_1 /bin/bash
+
 interface:
-	docker exec -it $(MACHINE) python -m interface
+	docker exec -it $(DIRNAME)_webserver_1 python -m lib.app.interface
 
 mongo:
-	docker exec -it $(MONGO) mongo
+	docker exec -it $(DIRNAME)_mongo_1 mongo
 
 redis:
-	docker exec -it $(REDIS) redis-cli
+	docker exec -it $(DIRNAME)_redis_1 redis-cli
 
-run:
-	docker-compose up

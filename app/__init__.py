@@ -34,7 +34,7 @@ def api_live():
 @APP.route('/logging_example')
 def logging_example():
     APP.logger.info(environ)
-    APP.logger.error('an error, oh no!')
+    APP.logger.error(vars())
     APP.logger.warning('this is a warning, move along.')
     APP.logger.debug('this is a debug statement.')
     APP.logger.critical('stop everything!')

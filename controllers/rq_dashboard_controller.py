@@ -22,9 +22,8 @@ from rq import (Queue, Worker, cancel_job, get_failed_queue, pop_connection,
 rq_dashboard_blueprint = Blueprint(
     'rq_dashboard',
     __name__,
-    template_folder='lib/templates',
-    static_folder='static',
-    static_url_path= '/../static'
+    template_folder='../templates',
+    static_folder='../static',
 )
 
 

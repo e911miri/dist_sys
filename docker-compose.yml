@@ -20,12 +20,8 @@ postgresdata:
   image: postgres
   command: echo 'Data Container for PostgresDB'
   volumes:
-<<<<<<< Updated upstream
-    - /data/mongo
-=======
     - /var/lib/postgresql
     - /data/postgres
->>>>>>> Stashed changes
 
 redis:
   image: redis

@@ -2,10 +2,7 @@ Flask
 ipdb
 IPython
 mongoengine
-<<<<<<< Updated upstream
-=======
 psycopg2
->>>>>>> Stashed changes
 pymongo
 redis
 requests
